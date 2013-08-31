@@ -41,6 +41,7 @@ namespace Prizet
             Process game = new Process();
             game.StartInfo.FileName = gameArgs.AppPath;
             game.StartInfo.Arguments = GetLaunchArguments(gameArgs);
+            game.StartInfo.Verb = "runas";
             game.Start();
 
         }
