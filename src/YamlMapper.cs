@@ -69,11 +69,8 @@ namespace Prizet
                         // Read game arguemnts from YAML file.
                         gameArgs = new GameArguments();
                         gameArgs.AppParams   = (GetChildNodeByKey(rootChildren, ":app_params") as YamlSequenceNode).Select(par => (par as YamlScalarNode).Value).ToList();
-                        // appPath is the folder the executable is located in
-                        var appPath = (GetChildNodeByKey(rootChildren, ":app_path") as YamlScalarNode).Value;
-                        // appExe has the executable
-                        var appExe  = (GetChildNodeByKey(rootChildren, ":app_exe") as YamlScalarNode).Value.Split('/').LastOrDefault();
-                        gameArgs.AppPath     = String.Format(@"{0}\{1}", appPath, appExe);
+                        gameArgs.AppPath     = (GetChildNodeByKey(rootChildren, ":app_path") as YamlScalarNode).Value;
+                        gameArgs.AppExe      = (GetChildNodeByKey(rootChildren, ":app_exe") as YamlScalarNode).Value;
                         gameArgs.AppModPath  = (GetChildNodeByKey(rootChildren, ":app_modpath") as YamlScalarNode).Value;
                         gameArgs.Mods        = (GetChildNodeByKey(rootChildren, ":mods") as YamlScalarNode).Value;
 

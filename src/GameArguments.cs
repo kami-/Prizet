@@ -8,9 +8,14 @@ namespace Prizet
     class GameArguments
     {
         /// <summary>
-        /// The application's path. Can be found as ":app_path" in six_updater.yml.
+        /// Working directory of application. Can be found as ":app_path" in six_updater.yml.
         /// </summary>
         public string AppPath { get; set; }
+
+        /// <summary>
+        /// Executable file path. Can be found as ":app_exe" in six_updater.yml.
+        /// </summary>
+        public string AppExe { get; set; }
 
         /// <summary>
         /// Command-line arguments. Can be found as ":app_params".
