@@ -19,21 +19,26 @@ namespace Prizet
     {
         public Prizet(string[] args)
         {
-            // Get command-line arguments, and try to to launch game.
-            var cmdOptions = new CommandOptions();
-            if (CommandLine.Parser.Default.ParseArguments(args, cmdOptions))
+            // logger
+            ILogger logger = new SimpleLogger(String.Format("{0}\\{1}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Prizet"), "log.txt");
+            try
             {
-                try
+                // Get command-line arguments, and try to to launch game.
+                var cmdOptions = new CommandOptions();
+                if (CommandLine.Parser.Default.ParseArguments(args, cmdOptions))
                 {
-                    var gameLauncher = new GameLauncher(cmdOptions, new YamlMapper(Environment.UserName, cmdOptions.ConfigFilePath));
-                    gameLauncher.Launch();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("An error has occured! See details below: ");
-                    Console.WriteLine(e.Message);
+                
+                        var gameLauncher = new GameLauncher(cmdOptions, new YamlMapper(Environment.UserName, cmdOptions.ConfigFilePath), logger);
+                        gameLauncher.Launch();
+                
                 }
             }
+            catch (Exception e)
+            {
+                logger.AddEntry(new LogEntry(Environment.UserName, e.Message, LogEntryType.Error));
+            }
+
+            logger.Flush();
         }
     }
 }

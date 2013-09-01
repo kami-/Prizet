@@ -15,6 +15,23 @@ namespace Prizet
     }
 
     /// <summary>
+    /// Interface for logging.
+    /// </summary>
+    interface ILogger
+    {
+        /// <summary>
+        /// Add log entry to log.
+        /// </summary>
+        /// <param name="entry">Log entry.</param>
+        void AddEntry(LogEntry entry);
+
+        /// <summary>
+        /// Writes log entries to storage.
+        /// </summary>
+        void Flush();
+    }
+
+    /// <summary>
     /// Thrown when the data source to map is not found.
     /// </summary>
     class DataSourceNotFoundException : Exception

@@ -21,14 +21,21 @@ namespace Prizet
         private IGameArgumentsMapper gameArgsMapper;
 
         /// <summary>
+        /// Logger for logging errors and usage.
+        /// </summary>
+        private ILogger logger;
+
+        /// <summary>
         /// Initializes a new instance of GameLauncher with command options and game argument mapper.
         /// </summary>
         /// <param name="cmdOptions">Command-line arguments.</param>
         /// <param name="gameArgsMapper">GameArgument mapper.</param>
-        public GameLauncher(CommandOptions cmdOptions, IGameArgumentsMapper gameArgsMapper)
+        /// <param name="logger">Logger for logging errors and usage.</param>
+        public GameLauncher(CommandOptions cmdOptions, IGameArgumentsMapper gameArgsMapper, ILogger logger)
         {
             this.cmdOptions = cmdOptions;
             this.gameArgsMapper = gameArgsMapper;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -43,6 +50,8 @@ namespace Prizet
             game.StartInfo.Arguments = GetLaunchArguments(gameArgs);
             game.StartInfo.Verb = "runas";
             game.Start();
+
+            logger.AddEntry(new LogEntry(Environment.UserName, "Succesfully launched game.", LogEntryType.Information));
 
         }
 
