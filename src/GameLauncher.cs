@@ -73,6 +73,15 @@ namespace Prizet
                 }
             }
 
+            // Add custom arguments
+            if (!String.IsNullOrEmpty(cmdOptions.CustomArguments))
+            {
+                foreach (var arg in cmdOptions.CustomArguments.Split(' '))
+                {
+                    args.AppendFormat("-{0} ", arg);
+                }
+            }
+
             // Add -mod argument if there are any mods
             if (!String.IsNullOrEmpty(gameArgs.Mods) || gameArgs.Folders.Count() > 0)
             {
