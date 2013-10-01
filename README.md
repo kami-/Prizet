@@ -13,3 +13,4 @@ A simple launcher for ArmA using Six Updater's last used preset.
 
 ## Command-line options
 * ``` -f C:\path\to\six-updater.yml ``` Custom configuration file to use to launch the game
+* ``` -c C:\path\to\six-updater.yml ``` Custom game arguments
