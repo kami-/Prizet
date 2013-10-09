@@ -70,9 +70,19 @@ namespace Prizet
                         gameArgs = new GameArguments();
                         gameArgs.AppParams   = (GetChildNodeByKey(rootChildren, ":app_params") as YamlSequenceNode).Select(par => (par as YamlScalarNode).Value).ToList();
                         gameArgs.AppPath     = (GetChildNodeByKey(rootChildren, ":app_path") as YamlScalarNode).Value;
-                        gameArgs.AppExe      = (GetChildNodeByKey(rootChildren, ":app_exe") as YamlScalarNode).Value;
-                        gameArgs.AppModPath  = (GetChildNodeByKey(rootChildren, ":app_modpath") as YamlScalarNode).Value;
+                        gameArgs.AppExe      = (GetChildNodeByKey(rootChildren, ":app_exe") as YamlScalarNode).Value;                     
                         gameArgs.Mods        = (GetChildNodeByKey(rootChildren, ":mods") as YamlScalarNode).Value;
+
+                        // If no mod forlder is given, use the game's folder
+                        var appModPath = GetChildNodeByKey(rootChildren, ":app_modpath") as YamlScalarNode;
+                        if (appModPath == null)
+                        {
+                            gameArgs.AppModPath = gameArgs.AppPath;
+                        }
+                        else
+                        {
+                            gameArgs.AppModPath = appModPath.Value;
+                        }
 
                         var yamlFolders = (GetChildNodeByKey(rootChildren, ":folders") as YamlSequenceNode).Children;
                         gameArgs.Folders = (from fold in yamlFolders
