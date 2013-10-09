@@ -52,7 +52,7 @@ namespace Prizet
             game.StartInfo.Verb = "runas";
             game.Start();
 
-            logger.AddEntry(new LogEntry(Environment.UserName, "Succesfully launched game.", LogEntryType.Information));
+            logger.AddEntry(new LogEntry(Environment.UserName, String.Format("Succesfully launched game with: WDir: {0}; File: {1} {2}", gameArgs.AppPath, game.StartInfo.FileName, game.StartInfo.Arguments), LogEntryType.Information));
 
         }
 

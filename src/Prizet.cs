@@ -27,15 +27,13 @@ namespace Prizet
                 var cmdOptions = new CommandOptions();
                 if (CommandLine.Parser.Default.ParseArguments(args, cmdOptions))
                 {
-                
-                        var gameLauncher = new GameLauncher(cmdOptions, new YamlMapper(Environment.UserName, cmdOptions.ConfigFilePath), logger);
-                        gameLauncher.Launch();
-                
+                    var gameLauncher = new GameLauncher(cmdOptions, new YamlMapper(Environment.UserName, cmdOptions.ConfigFilePath), logger);
+                    gameLauncher.Launch();
                 }
             }
             catch (Exception e)
             {
-                logger.AddEntry(new LogEntry(Environment.UserName, e.Message, LogEntryType.Error));
+                logger.AddEntry(new LogEntry(Environment.UserName, String.Format("Message: {0}; Trace: {1};", e.Message, e.StackTrace, e.TargetSite.Name), LogEntryType.Error));
             }
 
             logger.Flush();
