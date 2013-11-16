@@ -50,6 +50,9 @@ namespace Prizet
             game.StartInfo.FileName = gameArgs.AppExe;
             game.StartInfo.Arguments = GetLaunchArguments(gameArgs);
             game.StartInfo.Verb = "runas";
+
+            logger.AddEntry(new LogEntry(Environment.UserName, String.Format("Trying to launch game with: WDir: {0}; File: {1} {2}", gameArgs.AppPath, game.StartInfo.FileName, game.StartInfo.Arguments), LogEntryType.Information));
+
             game.Start();
 
             logger.AddEntry(new LogEntry(Environment.UserName, String.Format("Succesfully launched game with: WDir: {0}; File: {1} {2}", gameArgs.AppPath, game.StartInfo.FileName, game.StartInfo.Arguments), LogEntryType.Information));
